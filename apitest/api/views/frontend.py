@@ -1,5 +1,5 @@
 from flask import Blueprint
-from yourapplication import app
+from api import app
 
 
 func2 = Blueprint('func2', __name__, url_prefix='/func2')
