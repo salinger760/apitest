@@ -6,10 +6,10 @@ DEBUG = False
 
 config = {
   "user": "root",
-  "password": "passowrd",
+  "password": "password",
   "host": "127.0.0.1",
   "port": 3306,
-  "database": "wikitest"
+  "database": "testdb"
 }
 dsn_fmt = 'mysql+pymysql://%(user)s:%(password)s@%(host)s:%(port)s/%(database)s?charset=utf8'
 dsn = dsn_fmt % config

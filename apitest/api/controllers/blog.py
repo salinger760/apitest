@@ -2,8 +2,8 @@ from flask import Blueprint
 from api import app
 
 
-func2 = Blueprint('func2', __name__, url_prefix='/func2')
+mod = Blueprint('func2', __name__, url_prefix='/func2')
 
-@func2.route('/a')
+@mod.route('/a')
 def func2_a():
   return 'func2_a'

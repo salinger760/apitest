@@ -12,9 +12,9 @@ engine = create_engine(app.config['DATABASE_URI'],
                       )
 
 db_session = scoped_session(sessionmaker(autocommit=False,
-                                      autoflush=False,
-                                      bind=engine
-                                     ))
+                                         autoflush=False,
+                                         bind=engine
+                                        ))
 
 Model = declarative_base(name='Model')
 Model.query = db_session.query_property()

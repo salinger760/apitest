@@ -1,4 +1,4 @@
-from api.models import *
+from . import *
 
 class User(Model):
   __tablename__ = 'users'
