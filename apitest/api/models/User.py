@@ -7,18 +7,25 @@ class User(Model):
   name = Column(String(200))
 
   def __init__(self, name, openid):
-      self.name = name
-      self.openid = openid
+    self.name = name
+    self.openid = openid
 
   def to_json(self):
-      return dict(name=self.name, is_admin=self.is_admin)
+    return dict(name=self.name, is_admin=self.is_admin)
+
+  def get_search_document(self):
+    return dict(
+      id = self.id,
+      name = self.name,
+      openid = self.openid
+    )
 
   @property
   def is_admin(self):
-      return self.openid in app.config['ADMINS']
+    return self.openid in app.config['ADMINS']
 
   def __eq__(self, other):
-      return type(self) is type(other) and self.id == other.id
+    return type(self) is type(other) and self.id == other.id
 
   def __ne__(self, other):
-      return not self.__eq__(other)
+    return not self.__eq__(other)
