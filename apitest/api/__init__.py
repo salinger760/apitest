@@ -8,6 +8,7 @@ app.config.from_object('webconfig')
 # Controller (and Router)
 import api.controllers
 
+
 # Create tables
 #from api.models import init_db
 #init_db()
