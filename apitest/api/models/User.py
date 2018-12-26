@@ -1,33 +1,27 @@
 from . import *
-from . import db_session
 from api import app
-from flask_marshmallow import Marshmallow
+from marshmallow import Schema, fields, post_load, pprint
 
 
 class User(Model):
   __tablename__ = 'users'
   id = Column('user_id', Integer, primary_key=True)
   openid = Column('openid', String(200))
-  name = Column(String(200))
+  name = Column('name', String(200))
 
-  def __init__(self):
-    ma = Marshmallow(app)
+  #def __init__(self):
 
   def to_json(self):
     return dict(name = self.name, is_admin = self.is_admin)
 
-  def selectAll(self):
-    users = db_session.query(User.name, User.openid).all()
-
   def to_dict(self, user):
     return {
-      'id': uesr.id,
+      'id': user.id,
       'openid': user.openid,
       'name': user.name
       # Personに紐づいているHobbyを全部出力
       # 'hobby': [Hobby.to_dict(hobby) for hobby in self.hobbies]
     }
-
 
   @property
   def is_admin(self):
@@ -38,3 +32,15 @@ class User(Model):
 
   def __ne__(self, other):
     return not self.__eq__(other)
+
+
+class UserSchema(Schema):
+  id = fields.Integer(dump_only=True)
+  openid = fields.Str(required=True)
+  name = fields.Str()
+
+  class Meta:
+    strict = True
+
+  def format_name(self, author):
+        return "{}, {}".format(user.openid, user.name)
