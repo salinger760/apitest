@@ -5,6 +5,9 @@ app = Flask(__name__)
 CORS(app)
 app.config.from_object('webconfig')
 
+# authentication
+import auth
+
 # Controller (and Router)
 import api.controllers
 

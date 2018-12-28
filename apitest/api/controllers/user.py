@@ -7,7 +7,7 @@ import pprint
 
 user = User()
 user_schema = UserSchema()
-users_schema = UserSchema(many=True, only=('id', 'openid'))
+users_schema = UserSchema(many=True)
 
 
 '''
@@ -35,8 +35,8 @@ def func1_a():
 
 @mod.route('/b')
 def func1_b():
-  #rows = db_session.query(User).all()
-  rows = User.query.all()
+  rows = db_session.query(User).all()
+  #rows = User.query.all()
   # Serialize the queryset
   result = users_schema.dump(rows)
   return jsonify({'users!': result.data})
