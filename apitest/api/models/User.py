@@ -19,8 +19,6 @@ class User(Model):
       'id': user.id,
       'openid': user.openid,
       'name': user.name
-      # Personに紐づいているHobbyを全部出力
-      # 'hobby': [Hobby.to_dict(hobby) for hobby in self.hobbies]
     }
 
   @property
@@ -43,4 +41,4 @@ class UserSchema(Schema):
     strict = True
 
   def format_name(self, author):
-        return "{}, {}".format(user.openid, user.name)
+    return "{}, {}".format(user.openid, user.name)

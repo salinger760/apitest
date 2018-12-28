@@ -6,7 +6,8 @@ from api.models.User import User, UserSchema
 import pprint
 
 user = User()
-schema = UserSchema()
+user_schema = UserSchema()
+users_schema = UserSchema(many=True, only=('id', 'openid'))
 
 
 '''
@@ -23,21 +24,22 @@ def dump_data():
   #for row in users:
   #  print("%d, %s : %s" % (row.id, row.name, row.openid))
 
-dump_data()
+#dump_data()
 
 
 mod = Blueprint('func1', __name__, url_prefix='/func1')
 
 @mod.route('/a')
 def func1_a():
-  return jsonify({"data": [user.to_dict(u) for u in user.query.all()]})
+  return jsonify({"data": [user.to_dict(u) for u in User.query.all()]})
 
 @mod.route('/b')
 def func1_b():
-  #row = db_session.query(User).all()
-  result = schema.dump(user)
-
-  return pprint(result.data)
+  #rows = db_session.query(User).all()
+  rows = User.query.all()
+  # Serialize the queryset
+  result = users_schema.dump(rows)
+  return jsonify({'users!': result.data})
 
 @mod.route('/')
 def hello():
