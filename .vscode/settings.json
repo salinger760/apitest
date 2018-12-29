@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "bin": true,
+    "lib": true,
+    "lib64": true,
+  }
+}
